@@ -4,6 +4,11 @@ import java.util.Stack
 val openingToClosingBrackets = mapOf('{' to '}', '[' to ']', '(' to ')')
 
 fun checkBrackets(inputString: String, openingToClosingBrackets: Map<Char, Char>): Boolean {
+    // return false if string is empty
+    if (inputString.isEmpty()) {
+        return false
+    }
+
     val openingBrackets = openingToClosingBrackets.keys
     val closingBrackets = openingToClosingBrackets.values
 
