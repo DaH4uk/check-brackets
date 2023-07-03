@@ -36,8 +36,9 @@ fun checkBrackets(inputString: String, openingToClosingBrackets: Map<Char, Char>
             if (openingToClosingBrackets[last] != char) {
                 return emptyList()
             }
-            positions.add(Triple(start, index, last))
 
+            // add position of opening and closing brackets to the result list
+            positions.add(Triple(start, index, last))
         }
     }
 
@@ -46,4 +47,5 @@ fun checkBrackets(inputString: String, openingToClosingBrackets: Map<Char, Char>
         return emptyList()
     }
 
-    return positions}
+    return positions
+}
