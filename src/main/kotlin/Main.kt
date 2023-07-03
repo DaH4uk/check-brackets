@@ -25,7 +25,7 @@ fun checkBrackets(inputString: String, openingToClosingBrackets: Map<Char, Char>
         if (openingBrackets.contains(char)) {
             stack.push(char to index)
 
-        // check if closing bracket matches last opening bracket
+            // check if closing bracket matches last opening bracket
         } else if (closingBrackets.contains(char)) {
             // return empty list if stack is empty
             if (stack.isEmpty()) {
