@@ -4,73 +4,107 @@ import org.junit.jupiter.api.Test
 class MainKtTest {
 
     @Test
-    fun `should return false for random string`() {
+    fun `should return empty list for random string`() {
         val testCase = "Hello, world!"
 
-        assertFalse(checkBrackets(testCase, openingToClosingBrackets))
+        val positions = checkBrackets(testCase, openingToClosingBrackets)
+
+        assertTrue(positions.isEmpty())
     }
 
     @Test
-    fun `should return true for valid string`() {
+    fun `should return positions for valid string`() {
         val testCase = "((({{}})))()[][][{{}}]"
 
-        assertTrue(checkBrackets(testCase, openingToClosingBrackets))
+        val positions = checkBrackets(testCase, openingToClosingBrackets)
+
+        val expectedPositions = listOf(
+            Triple(4, 5, '{'),
+            Triple(3, 6, '{'),
+            Triple(2, 7, '('),
+            Triple(1, 8, '('),
+            Triple(0, 9, '('),
+            Triple(10, 11, '('),
+            Triple(12, 13, '['),
+            Triple(14, 15, '['),
+            Triple(18, 19, '{'),
+            Triple(17, 20, '{'),
+            Triple(16, 21, '[')
+        )
+        assertTrue(positions.isNotEmpty())
+        assertEquals(expectedPositions, positions)
     }
 
     @Test
-    fun `should return false for invalid string`() {
+    fun `should return empty list for invalid string`() {
         val testCase = "({)}]"
 
-        assertFalse(checkBrackets(testCase, openingToClosingBrackets))
+        val positions = checkBrackets(testCase, openingToClosingBrackets)
+
+        assertTrue(positions.isEmpty())
     }
 
     @Test
-    fun `should return false for string with unpaired opening brackets`() {
+    fun `should return empty list for string with unpaired opening brackets`() {
         val testCase = "({{[("
 
-        assertFalse(checkBrackets(testCase, openingToClosingBrackets))
+        val positions = checkBrackets(testCase, openingToClosingBrackets)
+
+        assertTrue(positions.isEmpty())
     }
 
     @Test
-    fun `should return false for string with unpaired closing brackets`() {
+    fun `should return empty list for string with unpaired closing brackets`() {
         val testCase = "}}])"
 
-        assertFalse(checkBrackets(testCase, openingToClosingBrackets))
+        val positions = checkBrackets(testCase, openingToClosingBrackets)
+
+        assertTrue(positions.isEmpty())
     }
 
     @Test
-    fun `should return false for the empty string`() {
+    fun `should return empty list for the empty string`() {
         val testCase = ""
 
-        assertFalse(checkBrackets(testCase, openingToClosingBrackets))
+        val positions = checkBrackets(testCase, openingToClosingBrackets)
+
+        assertTrue(positions.isEmpty())
     }
 
     @Test
-    fun `should return false for string with unpaired brackets`() {
+    fun `should return empty list for string with unpaired brackets`() {
         val testCase = "({{[()}}])"
 
-        assertFalse(checkBrackets(testCase, openingToClosingBrackets))
+        val positions = checkBrackets(testCase, openingToClosingBrackets)
+
+        assertTrue(positions.isEmpty())
     }
 
     @Test
-    fun `should return false one open string`() {
+    fun `should return empty list one open string`() {
         val testCase = "{"
 
-        assertFalse(checkBrackets(testCase, openingToClosingBrackets))
+        val positions = checkBrackets(testCase, openingToClosingBrackets)
+
+        assertTrue(positions.isEmpty())
     }
 
     @Test
-    fun `should return false one close string`() {
+    fun `should return empty list one close string`() {
         val testCase = "}"
 
-        assertFalse(checkBrackets(testCase, openingToClosingBrackets))
+        val positions = checkBrackets(testCase, openingToClosingBrackets)
+
+        assertTrue(positions.isEmpty())
     }
 
     @Test
-    fun `should return false for string with wrong order`() {
+    fun `should return empty list for string with wrong order`() {
         val testCase = "({{[()]}}])"
 
-        assertFalse(checkBrackets(testCase, openingToClosingBrackets))
+        val positions = checkBrackets(testCase, openingToClosingBrackets)
+
+        assertTrue(positions.isEmpty())
     }
 
     @Test
@@ -79,7 +113,7 @@ class MainKtTest {
         val testCase = "(".repeat(n) + ")".repeat(n)
 
         val startTime = System.nanoTime()
-        assertTrue(checkBrackets(testCase, openingToClosingBrackets))
+        checkBrackets(testCase, openingToClosingBrackets)
         val endTime = System.nanoTime()
         println("Time: ${(endTime - startTime) / 1_000_000} ms")
     }
